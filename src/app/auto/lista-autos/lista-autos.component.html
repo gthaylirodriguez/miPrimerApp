@@ -1,0 +1,64 @@
+<div class="card">
+    <div class="card-header">
+        <h1>{{tituloListaAutos}}</h1>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <label class="form-label">Filtrar por: </label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" >
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Filtrar por:</h3>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div class="table table-dark table-striped table-bordered" *ngIf="listaAutos.length>0">
+            <thead>
+                <tr>
+                    <th>
+                        <button class="btn btn-primary" (click)="toggleImage()">
+                            {{muestraImagen ? "Ocultar":"Mostrar"}} imagen
+                        </button>
+                    </th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Año</th>
+                    <th>Color</th>
+                    <th>Kilómetros</th>
+                    <th>Precio</th>
+                    <th>Calificación</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr *ngFor="let auto of listaAutos">
+                    <td style="width: 10%;">
+                        <p><img class="img-thumbnail" [src]="auto.imagenUrl" *ngIf="muestraImagen"></p>
+                    </td>
+                    <td>{{auto.marca}}</td>
+                    <td>{{auto.modelo}}</td>
+                    <td>{{auto.anio}}</td>
+                    <td>{{auto.color}}</td>
+                    <td>{{auto.kilometros}}</td>
+                    <td>{{auto.precio}}</td>
+                    <td>
+                        <app-calificacion [calificacion]="auto.calificacion" (select)="mostrarAlert($event)"></app-calificacion>
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group">
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+
+            </tfoot>
+        </div>
+    </div>
+</div>
