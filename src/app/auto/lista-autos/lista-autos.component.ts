@@ -31,4 +31,15 @@ export class ListaAutosComponent implements OnInit{
         alert("La calificación es: " + calificacion);
     }
 
+    eliminarAuto(auto: any){
+
+    }
+
+    getListaAutos(){
+        this.listaAutos = this.autoServices.filtrarAuto(this.filtro);
+        return this.listaAutos;
+    }
+
+
+
 }

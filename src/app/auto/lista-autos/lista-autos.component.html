@@ -4,11 +4,9 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-12">
+            <div class="mb-3">
                 <label class="form-label">Filtrar por: </label>
-            </div>
-            <div class="col-md-4">
-                <input type="text" class="form-control" >
+                <input type="text" class="form-control" [(ngModel)]="filtro" >
             </div>
         </div>
         <div class="row">
@@ -18,7 +16,7 @@
         </div>
     </div>
     <div class="table-responsive">
-        <div class="table table-dark table-striped table-bordered" *ngIf="listaAutos.length>0">
+        <div class="table table-dark table-striped table-bordered" >
             <thead>
                 <tr>
                     <th>
@@ -37,7 +35,7 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr *ngFor="let auto of listaAutos">
+                <tr *ngFor="let auto of getListaAutos()">
                     <td style="width: 10%;">
                         <p><img class="img-fluid" [src]="auto.imagenUrl" *ngIf="muestraImagen"></p>
                     </td>

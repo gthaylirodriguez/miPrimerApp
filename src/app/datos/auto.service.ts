@@ -6,11 +6,40 @@ import { Injectable } from '@angular/core';
 export class AutoService {
 
 constructor() { }
-
+baseUrl = "http://www.epico.gob.ec/vehiculo/public/api/";
 
 getAutos(){
   return this.listaAutos;
 }
+
+agregarAuto(auto: any){
+  this.listaAutos.push(auto);
+}
+
+actualizarAuto(records: any, codigo: string ){
+  let auto = this.listaAutos.find((item)=> item.codigo == codigo);
+  auto.marca = records.marca ? records.marca : auto.marca;
+  auto.codigo = records.codigo ? records.codigo : auto.codigo;
+  auto.modelo = records.modelo ? records.modelo : auto.modelo;
+  auto.anio = records.anio ? records.anio : auto.anio;
+  auto.calificacion = records.calificacion ? records.calificacion : auto.calificacion;
+}
+
+eliminarAuto(codigo:string){
+  let index = this.listaAutos.findIndex((item)=> item.codigo == codigo);
+  this.listaAutos.splice(index, 1);
+}
+
+filtrarAuto(filtro: string){
+  if (filtro ==""){
+    return this.listaAutos;
+  }
+  let lista= this.listaAutos.filter((item)=> 
+    item.codigo.includes(filtro.toUpperCase()) || item.modelo.includes(filtro.toUpperCase()) || item.marca.includes(filtro.toUpperCase()) 
+  )
+  return lista;
+}
+
 
 private listaAutos: any[] = [
   {"codigo":"001", "marca":"CHEVROLET", "modelo":"SAIL 1.5", "anio":"2023", "imagenUrl":"https://tuautoencasa.com/img/galeria/1619475914.jpg", "calificacion": 5},
