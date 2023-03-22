@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AutoService } from 'src/app/datos/auto.service';
+import { AutoService } from 'src/app/services/auto.service';
 
 @Component({
   selector: 'app-lista-autos-detalle',

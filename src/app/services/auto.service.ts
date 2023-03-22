@@ -1,33 +1,41 @@
 import { Injectable } from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import { Auto } from '../interface/auto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AutoService {
 
-constructor() { }
+constructor(private http: HttpClient) { }
 baseUrl = "http://www.epico.gob.ec/vehiculo/public/api/";
 
-getAutos(){
-  return this.listaAutos;
-}
-
-agregarAuto(auto: any){
-  this.listaAutos.push(auto);
-}
-
-actualizarAuto(records: any, codigo: string ){
-  let auto = this.listaAutos.find((item)=> item.codigo == codigo);
-  auto.marca = records.marca ? records.marca : auto.marca;
-  auto.codigo = records.codigo ? records.codigo : auto.codigo;
-  auto.modelo = records.modelo ? records.modelo : auto.modelo;
-  auto.anio = records.anio ? records.anio : auto.anio;
-  auto.calificacion = records.calificacion ? records.calificacion : auto.calificacion;
+getAutos(filtro?:string, rows?:number, page?:number){
+  let body = new HttpParams();
+  body = filtro ? body.set('filtro',filtro) : body;
+  body = rows ? body.set('rows',rows) : body;
+  body = page ? body.set('page',page) : body;
+  return this.http.get<any>(this.baseUrl+"vehiculos/", {params:body});
 }
 
 eliminarAuto(codigo:string){
-  let index = this.listaAutos.findIndex((item)=> item.codigo == codigo);
-  this.listaAutos.splice(index, 1);
+  return this.http.delete<any>(this.baseUrl+'vehiculo/'+codigo);
+  /*let index = this.listaAutos.findIndex((item) => item.codigo === codigo);
+  this.listaAutos.splice(index, 1);*/
+}
+
+agregarAuto(auto:Auto){
+  let body = this.getParamsAuto(auto);
+  return this.http.post<any>(this.baseUrl+'vehiculo/', body);
+}
+
+actualizarAuto(auto:Auto, codigo:string){
+  let body = this.getParamsAuto(auto);
+  return this.http.put<any>(this.baseUrl+'vehiculo/' + codigo, body);
+}
+
+getAuto(codigo:string){
+  return this.http.get<any>(this.baseUrl + "vehiculo/" + codigo);
 }
 
 filtrarAuto(filtro: string){
@@ -40,6 +48,16 @@ filtrarAuto(filtro: string){
   return lista;
 }
 
+getParamsAuto(auto:Auto){
+  let body = new HttpParams();
+  body = auto.codigo ? body.set('codigo',auto.codigo) : body;
+  body = auto.marca ? body.set('marca',auto.marca) : body;
+  body = auto.modelo ? body.set('modelo',auto.modelo) : body;
+  body = auto.anio ? body.set('anio',auto.anio) : body;
+  body = auto.calificacion ? body.set('calificacion',auto.calificacion) : body;
+  body = auto.imagenUrl ? body.set('foto',auto.imagenUrl) : body;
+  return body;
+}
 
 private listaAutos: any[] = [
   {"codigo":"001", "marca":"CHEVROLET", "modelo":"SAIL 1.5", "anio":"2023", "imagenUrl":"https://tuautoencasa.com/img/galeria/1619475914.jpg", "calificacion": 5},
