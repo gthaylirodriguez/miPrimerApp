@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 export class UserInterceptor implements HttpInterceptor {
 
     private keyUser: string = "user-request";
-    private user: string = "ThayliRodriguez"
+    private user: string = "thayli.rodriguez"
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
         let resqNew = req.clone({
             headers: req.headers.append(this.keyUser, this.user)
