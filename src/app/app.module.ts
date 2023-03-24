@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,6 +11,7 @@ import { ListaAutosComponent } from './auto/lista-autos/lista-autos.component';
 import { CalificacionComponent } from './components/calificacion/calificacion.component';
 import { PaginacionTablaComponent } from './components/paginacionTabla/paginacionTabla.component';
 import { ListaAutosDetalleComponent } from './auto/lista-autos-detalle/lista-autos-detalle.component';
+import { UserInterceptor } from './interceptores/userInterceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ListaAutosDetalleComponent } from './auto/lista-autos-detalle/lista-aut
     CommonModule,   HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS, useClass: UserInterceptor, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

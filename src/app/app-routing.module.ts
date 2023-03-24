@@ -15,7 +15,7 @@ const routes: Routes = [
     component: ListaAutosComponent
   },
   {
-    path: 'lista-autos/codigo',
+    path: 'lista-autos/:codigo',
     component: ListaAutosDetalleComponent
   },
   {

@@ -1,20 +1,23 @@
 <div class="card text-white- bg-dark">
   <div class="card-header bg-info">
-    <h4 class="text-light">{{tituloListaAutos}}</h4>
+    <div class="row">
+      <h4 class="col-8 text-light my-2">{{tituloListaAutos}}</h4>
+      <div class="col-4">
+        <input type="text" class="form-control btn-info my-2 my-sm-1" placeholder="Buscar" [(ngModel)]="filtro"
+          (input)="consultaAutos()">
+      </div>
+    </div>
   </div>
   <div class="card-body ">
     <div class="row">
-      <div class="col-1">
+      <div class="col-10">
         <button class="btn btn-outline-info my-1" data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo</button>
       </div>
-      <div class="col-5">
-        <input type="text" class="form-control btn-light my-2 my-sm-1" placeholder="Buscar" [(ngModel)]="filtro"
-          (input)="consultaAutos()">
-      </div>
+
       <div class="col-2">
         <div class="input-group input-group-sm mb-2 my-2">
-          <span class="input-group-text" id="basic-addon1">Filas: </span>
-          <select class="form-select form-select-sm" [(ngModel)]="rows" (change)="cambioRows()">
+          <span class="input-group-text bg-dark text-info " id="basic-addon1">Filas: </span>
+          <select class="form-select form-select-sm " [(ngModel)]="rows" (change)="cambioRows()">
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="25">25</option>
@@ -31,7 +34,7 @@
         <thead>
           <tr>
             <th>
-              <button class="btn btn-sm btn-outline-info" (click)="toggleImage()">
+              <button class="btn btn-sm btn-outline-info "  (click)="toggleImage()">
                 {{muestraImagen ? "Hide":"Show"}} Image
               </button>
             </th>
@@ -47,16 +50,16 @@
             <td style="width: 10%;">
               <p><img class="img-fluid" [src]="auto.foto" *ngIf="muestraImagen"></p>
             </td>
-            <td>{{auto.marca}}</td>
-            <td>{{auto.modelo}}</td>
-            <td>{{auto.anio}}</td>
+            <td >{{auto.marca}}</td>
+            <td >{{auto.modelo}}</td>
+            <td >{{auto.anio}}</td>
             <td>
               <app-calificacion [calificacion]="auto.calificacion" (select)="mostrarAlert($event)"></app-calificacion>
             </td>
             <td>
-              <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+              <div class="btn-group" role="group" aria-label="">
                 <a class="btn btn-sm btn-outline-info" [routerLink]="[auto.codigo]">Show</a>
-                <button class="btn btn-sm btn-outline-danger">Delete</button>
+                <button class="btn btn-sm btn-outline-info" (click)="eliminarAuto(auto)">Delete</button>
               </div>
             </td>
           </tr>
@@ -64,7 +67,7 @@
       </div>
     </div>
   </div>
-  <div class="card-footer">
+  <div class="card-footer bg-info">
     <div class="row">
       <td colspan="7">
         <app-paginacionTabla [rows]="rows" [pages]="pages"
