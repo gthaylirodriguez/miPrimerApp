@@ -12,12 +12,13 @@ import { CalificacionComponent } from './components/calificacion/calificacion.co
 import { PaginacionTablaComponent } from './components/paginacionTabla/paginacionTabla.component';
 import { ListaAutosDetalleComponent } from './auto/lista-autos-detalle/lista-autos-detalle.component';
 import { UserInterceptor } from './interceptores/userInterceptor';
+import { ClientesComponent } from './auto/clientes/clientes.component';
 
 @NgModule({
   declarations: [
     AppComponent, ListaAutosComponent, 
     CalificacionComponent, PaginacionTablaComponent,
-    ListaAutosDetalleComponent
+    ListaAutosDetalleComponent, ClientesComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule,

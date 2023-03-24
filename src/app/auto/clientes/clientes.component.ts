@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-clientes',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private clienteServices: ClienteService, 
+    private formBuilder: FormBuilder){ }
 
-  ngOnInit() {
+    tituloCliente: string = "Registrar Cliente";
+
+    formularioCliente :  FormGroup;
+    deseaContacto: boolean = false;
+
+  contacto(){
+    this.deseaContacto = !this.deseaContacto;
   }
+  ngOnInit() {
+    this.formularioCliente = this.formBuilder.group({
+      "nombre": [null],
+      "apellido":[null],
+      "telefono": [null],
+      "email": [null]
+    });
+  }
+
 
 }
