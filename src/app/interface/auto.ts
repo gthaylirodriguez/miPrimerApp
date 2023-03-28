@@ -3,7 +3,7 @@ export interface Auto {
     marca:string;
     modelo:string;
     anio:number;
-    imagenUrl?:string;
+    foto?:string;
     calificacion:number;
     id?:number;
 }

@@ -34,7 +34,7 @@ export class ListaAutosComponent implements OnInit{
           "codigo": [null],
           "anio": [null],
           "calificacion": [null],
-          "imageUrl": [null]
+          "foto": [null]
         });
     }
 
@@ -79,6 +79,7 @@ export class ListaAutosComponent implements OnInit{
           console.log(respuesta);
           if(respuesta.codigo == 1){
             this.consultaAutos();
+            this.clearAuto()
           }
         },
         (errorHttp:HttpErrorResponse) => {
@@ -102,4 +103,7 @@ export class ListaAutosComponent implements OnInit{
         this.consultaAutos();
       }
 
+      clearAuto(){
+        this.formularioAuto.reset();
+      }
 }
