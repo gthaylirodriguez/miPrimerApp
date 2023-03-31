@@ -42,6 +42,8 @@
             <th>Modelo</th>
             <th>Año</th>
             <th>Calificación</th>
+            <th>Creado por</th>
+            <th>Actualizado por</th>
             <th>Opciones</th>
           </tr>
         </thead>
@@ -56,6 +58,8 @@
             <td>
               <app-calificacion [calificacion]="auto.calificacion" (select)="mostrarAlert($event)"></app-calificacion>
             </td>
+            <td >{{auto.usuario}}</td>
+            <td >{{auto.usuario_mod}}</td>
             <td>
               <div class="btn-group" role="group" aria-label="">
                 <a class="btn btn-sm btn-outline-info" [routerLink]="[auto.codigo]">Show</a>

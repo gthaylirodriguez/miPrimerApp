@@ -34,7 +34,9 @@ export class ListaAutosComponent implements OnInit{
           "codigo": [null],
           "anio": [null],
           "calificacion": [null],
-          "foto": [null]
+          "foto": [null],
+          "usuario": [null],
+          "usuario_mod": [null]
         });
     }
 

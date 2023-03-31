@@ -5,5 +5,7 @@ export interface Auto {
     anio:number;
     foto?:string;
     calificacion:number;
+    usuario: string;
+    usuario_mod:string;
     id?:number;
 }

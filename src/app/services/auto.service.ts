@@ -45,6 +45,9 @@ getParamsAuto(auto:Auto){
   body = auto.anio ? body.set('anio',auto.anio) : body;
   body = auto.calificacion ? body.set('calificacion',auto.calificacion) : body;
   body = auto.foto ? body.set('foto',auto.foto) : body;
+  body = auto.usuario ? body.set('usuario',auto.usuario) : body;
+  body = auto.usuario_mod ? body.set('usuario_mod',auto.usuario_mod) : body;
+  
   return body;
 }
 
