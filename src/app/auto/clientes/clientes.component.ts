@@ -57,23 +57,30 @@ export class ClientesComponent implements OnInit {
 
 
   guardarCliente(){
+
     let cliente:Cliente = {...this.formularioCliente.value};
-    this.clienteServices.agregarCliente(cliente).subscribe((respuesta)=>{
-      alert(respuesta.mensaje);
-      console.log(respuesta);
-      if(respuesta.codigo == 1){
-        this.clearClientes()
-      }
-    },
-    (errorHttp:HttpErrorResponse) => {
-      console.log(errorHttp.error);
-      let mensaje = errorHttp.error.mensaje;
-      mensaje += errorHttp.error.error?.id ? (' - ' + errorHttp.error.error?.id) : "";
-      mensaje += errorHttp.error.error?.nombre ? (' - ' + errorHttp.error.error?.nombre) : "";
-      mensaje += errorHttp.error.error?.apellido ? (' - ' + errorHttp.error.error?.apellido) : "";
-      mensaje += errorHttp.error.error?.telefono ? (' - ' + errorHttp.error.error?.telefono) : "";
-      mensaje += errorHttp.error.error?.email ? (' - ' + errorHttp.error.error?.email) : "";
-      alert(mensaje);
-    });
+
+    if ((this.deseaContacto && cliente.telefono == (null)) || (this.deseaContacto && cliente.email == (null))) {
+        alert("Por favor llene los campos requeridos del contacto")
+    }
+    else{
+      this.clienteServices.agregarCliente(cliente).subscribe((respuesta)=>{
+        alert(respuesta.mensaje);
+        console.log(respuesta);
+        if(respuesta.codigo == 1){
+          this.clearClientes()
+        }
+      },
+      (errorHttp:HttpErrorResponse) => {
+        console.log(errorHttp.error);
+        let mensaje = errorHttp.error.mensaje;
+        mensaje += errorHttp.error.error?.id ? (' - ' + errorHttp.error.error?.id) : "";
+        mensaje += errorHttp.error.error?.nombre ? (' - ' + errorHttp.error.error?.nombre) : "";
+        mensaje += errorHttp.error.error?.apellido ? (' - ' + errorHttp.error.error?.apellido) : "";
+        mensaje += errorHttp.error.error?.telefono ? (' - ' + errorHttp.error.error?.telefono) : "";
+        mensaje += errorHttp.error.error?.email ? (' - ' + errorHttp.error.error?.email) : "";
+        alert(mensaje);
+      });
+    }
   }
 }
